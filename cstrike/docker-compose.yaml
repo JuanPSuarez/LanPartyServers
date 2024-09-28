@@ -1,0 +1,57 @@
+#on volumes, add the path to the hlds folder in your host machine
+services:
+  gungame:
+    image: kran0/hlds:latest
+    container_name: "GunGame"
+    environment:
+      GAME:        "cstrike"
+      MAXPLAYERS:  "16"
+      START_MAP:   "de_inferno"
+      SERVER_NAME: "GunGame Server"
+      START_MONEY: "16000"
+      SERVER_PASSWORD: ""
+      RCON_PASSWORD:   "supersecret"
+    ports:
+#      - 26900:26900/udp # valve servers
+#      - 27020:27020/udp # hltv
+      - 27015:27015/udp # server
+      - 27015:27015/tcp # RCON
+    # volumes:
+    #   - /home/jota/Documents/gg/hlds-docker/gungame/hlds:/opt/hlds/
+  deathmatch:
+    image: kran0/hlds:latest
+    container_name: "Deathmatch"
+    environment:
+      GAME:        "cstrike"
+      MAXPLAYERS:  "16"
+      START_MAP:   "cs_assault"
+      SERVER_NAME: "Deathmatch Server"
+      START_MONEY: "16000"
+      SERVER_PASSWORD: ""
+      RCON_PASSWORD:   "supersecret"
+    ports:
+#      - 26901:26900/udp
+#     - 27021:27020/udp
+      - 27016:27015/udp
+      - 27016:27015/tcp
+    # volumes:
+    #   - /home/jota/Documents/gg/hlds-docker/deathmatch/hlds:/opt/hlds/
+
+  zombie:
+    image: kran0/hlds:latest
+    container_name: "Zombie"
+    environment:
+      GAME:        "cstrike"
+      MAXPLAYERS:  "32"
+      START_MAP:   "de_aztec"
+      SERVER_NAME: "Zombie Mode Server"
+      START_MONEY: "16000"
+      SERVER_PASSWORD: ""
+      RCON_PASSWORD:   "supersecret"
+    ports:
+#     - 26902:26900/udp
+#     - 27022:27020/udp
+      - 27017:27015/udp
+      - 27017:27015/tcp
+    # volumes:
+    #   - /home/jota/Documents/gg/hlds-docker/zombies/hlds:/opt/hlds/
